@@ -19,7 +19,7 @@ flowchart TD
         Q1["<b>Quadrant 1: Architectural Debt</b><br/>• Function Complexity (syntax tree)<br/>• Oversized Source Files<br/>• Discarded Exceptions"]
         Q2["<b>Quadrant 2: Security and Copyleft</b><br/>• Viral GPL / AGPL Detection<br/>• Hardcoded Secrets and API Keys<br/>• Transitive Dependency CVEs"]
         Q3["<b>Quadrant 3: Cloud and IaC Enclaves</b><br/>• Terraform / Kubernetes Drift<br/>• Public Storage and Ingress Drift<br/>• Air-Gapped VPC Boundaries"]
-        Q4["<b>Quadrant 4: Team and Keyman Dependency</b><br/>• Git Commit Entropy and Churn<br/>• Bus Factor &lt; 2 Analysis<br/>• Maintainer Concentration"]
+        Q4["<b>Quadrant 4: Team and Keyman Dependency</b><br/>• Git Commit Entropy<br/>• Bus Factor &lt; 2 Analysis<br/>• Maintainer Concentration"]
     end
 
     Q1 --> Schedule["<b>Investment Committee Purchase Price Adjustment Schedule</b><br/><i>E_total = Q1 + Q2 + Q3 + Q4</i>"]
@@ -55,13 +55,13 @@ Files in other languages, and files that do not parse, are checked by text patte
 
 Software license breaches represent statutory and commercial liabilities that can force acquirers to open-source proprietary IP or defend against copyright lawsuits.
 
-* **SPDX License Dependency Mapping:** Ingests `package.json`, `requirements.txt`, `go.mod`, `pom.xml`, and `Cargo.lock` to catalog every third-party component.
+* **SPDX License Dependency Mapping:** Ingests `package.json` and its lockfiles, `requirements.txt`, `poetry.lock`, `go.mod`, `pom.xml`, `Cargo.lock`, `Gemfile.lock` and `composer.lock` to catalog every third-party component. The licence of each pinned component is looked up in the public package registry and classified against the SPDX licence list. Licences the repository itself declares (licence files, manifest fields, `SPDX-License-Identifier` tags) are read the same way; a file that merely mentions a licence is not a finding.
 * **Viral Copyleft Infection (GPL/AGPL):** Evaluates licensing terms against proprietary commercial use. If viral licenses (GPL-2.0, GPL-3.0, AGPL-3.0) are statically linked into proprietary core assets, Veridence quantifies:
   $$
   L_{\text{copyleft}} = \text{Cost to Clean-Room Re-Engineer Infiltrated Modules}
   $$
-* **High-Liability CVEs:** Flags known vulnerabilities in production dependencies with high CVSS scores and active exploits.
-* **Hardcoded Secret Detection:** High-entropy regex scanning detects private keys, cloud tokens, database connection URIs, and authentication secrets committed to version history.
+* **High-Liability CVEs:** Flags published vulnerabilities with a CVSS score of 7.0 or more in production dependencies whose version is pinned.
+* **Hardcoded Secret Detection:** High-entropy regex scanning detects private keys, cloud tokens, database connection URIs, and authentication secrets in the audited commit.
 
 ---
 
@@ -83,5 +83,5 @@ Engineering team dynamics directly impact post-acquisition execution capability.
   $$
   H(C) = -\sum_{i=1}^n p(a_i) \log_2 p(a_i)
   $$
-* **Bus Factor Determination:** Calculates the minimum number of engineers whose departure would paralyze ongoing system maintenance.
-* **Keyman Escrow Allocation:** If an individual engineer contributed $>70\%$ of core IP over the trailing 12 months, Veridence recommends an executive retention escrow holdback to prevent intellectual property abandonment.
+* **Bus Factor Determination:** The smallest number of engineers who together made more than half of the commits in the 12 months before the audited commit.
+* **Keyman Escrow Allocation:** If an individual engineer made $>70\%$ of the commits over the trailing 12 months, Veridence recommends an executive retention escrow holdback to prevent intellectual property abandonment.

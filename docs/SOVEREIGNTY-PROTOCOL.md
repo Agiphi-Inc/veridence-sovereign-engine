@@ -35,6 +35,7 @@ sequenceDiagram
 ### 1. Ephemeral In-Memory Execution (tmpfs)
 * Code repositories are uncompressed strictly within volatile, in-memory virtual filesystems (`tmpfs`).
 * **Zero Disk Persistence:** No code files, syntax trees, or temporary artifacts are written to non-volatile storage.
+* **What Is Sent Outside:** To look up the licence and published vulnerabilities of third-party packages, the registry, name and version of each open-source package a repository depends on are sent to the public Open Source Insights service (deps.dev). No source code, repository name or customer identity is sent, and the lookup can be switched off for a deployment.
 
 ### 2. Zero Generative LLM Transmission
 * Analysis relies 100% on deterministic static analysis: syntax-tree analysis (Python's own parser; tree-sitter for JavaScript and TypeScript) and fixed pattern rules for licences, secrets, infrastructure and access policies.

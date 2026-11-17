@@ -56,7 +56,7 @@ flowchart TD
         Q1["<b>Quadrant 1: Architectural Debt</b><br/>• Function Complexity (syntax tree)<br/>• Oversized Source Files<br/>• Senior Refactor Dollar Remediation"]
         Q2["<b>Quadrant 2: Security and Copyleft License</b><br/>• Viral GPL / AGPL Detection<br/>• Proprietary Commercial Contamination<br/>• High-Liability CVEs and Secret Leaks"]
         Q3["<b>Quadrant 3: Cloud and IaC Infrastructure</b><br/>• Terraform / Kubernetes Misconfigurations<br/>• Public Storage and Ingress Drift<br/>• Air-Gapped VPC Boundary Failures"]
-        Q4["<b>Quadrant 4: Team Velocity and Keyman</b><br/>• Git Commit Entropy and Churn<br/>• Bus Factor &lt; 2 Analysis<br/>• Single-Engineer IP Concentration"]
+        Q4["<b>Quadrant 4: Team Velocity and Keyman</b><br/>• Git Commit Entropy<br/>• Bus Factor &lt; 2 Analysis<br/>• Single-Engineer IP Concentration"]
     end
 
     Q1 --> Schedule["<b>Investment Committee Purchase Price Adjustment Schedule</b><br/><i>E_total = Q1 + Q2 + Q3 + Q4</i>"]
