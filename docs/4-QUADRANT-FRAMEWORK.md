@@ -16,7 +16,7 @@ $$
 flowchart TD
     subgraph QuantEngine["4-Quadrant Infrastructure Risk Framework"]
         direction TB
-        Q1["<b>Quadrant 1: Architectural Debt</b><br/>• AST Cyclomatic Complexity<br/>• Circular Dependency Graph<br/>• Unmaintainable Modules"]
+        Q1["<b>Quadrant 1: Architectural Debt</b><br/>• Function Complexity (syntax tree)<br/>• Oversized Source Files<br/>• Discarded Exceptions"]
         Q2["<b>Quadrant 2: Security and Copyleft</b><br/>• Viral GPL / AGPL Detection<br/>• Hardcoded Secrets and API Keys<br/>• Transitive Dependency CVEs"]
         Q3["<b>Quadrant 3: Cloud and IaC Enclaves</b><br/>• Terraform / Kubernetes Drift<br/>• Public Storage and Ingress Drift<br/>• Air-Gapped VPC Boundaries"]
         Q4["<b>Quadrant 4: Team and Keyman Dependency</b><br/>• Git Commit Entropy and Churn<br/>• Bus Factor &lt; 2 Analysis<br/>• Maintainer Concentration"]
@@ -39,13 +39,15 @@ flowchart TD
 
 Target codebases often accumulate unrefactored legacy debt that reduces post-merger development velocity and requires significant engineering reinvestment.
 
-* **AST Cyclomatic Complexity:** Functions with McCabe cyclomatic complexity exceedances over maintainability thresholds ($M_{\text{threshold}} = 15$) are identified deterministically:
+* **Cyclomatic Complexity:** Python files are parsed with Python's own parser, and JavaScript and TypeScript files with tree-sitter. Functions whose McCabe cyclomatic complexity exceeds the maintainability threshold ($M_{\text{threshold}} = 15$) are identified deterministically from the syntax tree:
   $$
   Q_1 = \sum_{f \in \text{Functions}} \max(0, C(f) - M_{\text{threshold}}) \times H_{\text{refactor}} \times R_{\text{senior}}
   $$
-  *(where $H_{\text{refactor}}$ represents standard refactoring hours per complexity unit, and $R_{\text{senior}} = 175\text{ USD/hr}$ represents benchmark engineering labor).*
-* **Circular Dependency Ring Analysis:** Dependency graphs are parsed to identify circular import chains that prohibit modular extraction or microservice refactoring.
-* **Dead Code Identification:** AST symbol graphs detect unreferenced classes, orphan controllers, and abandoned legacy routes that inflate maintenance overhead.
+  *(where $H_{\text{refactor}}$ represents refactoring hours per complexity unit, 4 in the current engine, and $R_{\text{senior}} = 175\text{ USD/hr}$ represents benchmark engineering labor).*
+* **Oversized Source Files:** Source files of more than 1,000 lines are reported, in any supported language.
+* **Discarded Exceptions:** Handlers that catch every error and do nothing with it are reported.
+
+Files in other languages, and files that do not parse, are checked by text patterns instead of by syntax tree. Every finding in a report states which method found it.
 
 ---
 

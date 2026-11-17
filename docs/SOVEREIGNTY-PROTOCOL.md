@@ -14,13 +14,13 @@ sequenceDiagram
     actor DealTeam as PE Deal Team (Slack)
     participant SlackBot as Veridence Slack Bot
     participant RAM as Volatile RAM Sandbox
-    participant AST as Deterministic AST Engine
+    participant AST as Deterministic Analysis Engine
     participant PDF as IC PDF Certificate Generator
 
     DealTeam->>SlackBot: /veridence audit <repo_url>
     SlackBot->>RAM: Stream repo zipball ephemerally
     Note over RAM: In-Memory Virtual tmpfs (0 Disk Writes)
-    RAM->>AST: Parse AST, licenses, IaC, commit logs
+    RAM->>AST: Analyse source, licences, IaC
     AST->>AST: Quantify 4-Quadrant EBITDA Liabilities
     AST-->>RAM: Wipe memory & destroy RAM sandbox
     Note over RAM: Cryptographic Zero-Fill Purge Complete
@@ -34,10 +34,10 @@ sequenceDiagram
 
 ### 1. Ephemeral In-Memory Execution (tmpfs)
 * Code repositories are uncompressed strictly within volatile, in-memory virtual filesystems (`tmpfs`).
-* **Zero Disk Persistence:** No code files, AST graphs, or temporary artifacts are written to non-volatile storage.
+* **Zero Disk Persistence:** No code files, syntax trees, or temporary artifacts are written to non-volatile storage.
 
 ### 2. Zero Generative LLM Transmission
-* Analysis relies 100% on deterministic static analysis: Tree-sitter Abstract Syntax Trees (ASTs), SPDX license database matching, and compiler symbol tables.
+* Analysis relies 100% on deterministic static analysis: syntax-tree analysis (Python's own parser; tree-sitter for JavaScript and TypeScript) and fixed pattern rules for licences, secrets, infrastructure and access policies.
 * Code is **never** sent to OpenAI, Anthropic, Google Gemini, or any third-party model inference provider.
 * Eliminates generative hallucination risk and guarantees complete immunity to model training exposure.
 

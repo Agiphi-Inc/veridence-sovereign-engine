@@ -24,7 +24,7 @@ flowchart LR
     A["<b>April 2026 Research Report</b><br/><i>'Agentic Forensic Reasoning'</i><br/>[RG: 412115837]"] -->|Architectural Redesign| B["<b>August 2026 Technical Report</b><br/><i>'Deterministic Algorithmic TDD'</i><br/>[RG: 404363566]"]
     
     A -.-> C["<b>Historical Archive</b><br/>github.com/agiphi/Veridence<br/><i>(Frozen for Citation Integrity)</i>"]
-    B -.-> D["<b>Production Engine</b><br/>github.com/agiphi/veridence-sovereign-engine<br/><i>(Deterministic AST & Sovereignty Enclave)</i>"]
+    B -.-> D["<b>Production Engine</b><br/>github.com/agiphi/veridence-sovereign-engine<br/><i>(Deterministic Analysis & Sovereignty Enclave)</i>"]
 
     classDef legacy fill:#1e1b4b,stroke:#818cf8,stroke-width:1px,color:#e0e7ff;
     classDef current fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
@@ -37,7 +37,7 @@ flowchart LR
 | Dimension | Historical Research Archive (April 2026) | Current Sovereign Production Architecture (August 2026) |
 | :--- | :--- | :--- |
 | **Foundational Publication** | *"Agentic Forensic Reasoning for Technical Due Diligence"* ([ResearchGate 412115837](https://www.researchgate.net/publication/412115837_Agentic_Forensic_Reasoning_for_Technical_Due_Diligence_The_Sovereignty_Protocol_and_Infrastructure_Risk_F_Quantification)) | *"Deterministic Algorithmic Technical Due Diligence: Air-Gapped TDD, The Sovereignty Protocol, and 4-Quadrant Infrastructure Risk Quantification"* ([ResearchGate 404363566](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification)) |
-| **Analysis Engine** | Agentic LLM reasoning chains & multi-turn heuristic prompting | **100% Deterministic Static Analysis** (Tree-sitter AST parsing, compiler symbol resolution, rule-based heuristics) |
+| **Analysis Engine** | Agentic LLM reasoning chains & multi-turn heuristic prompting | **100% Deterministic Static Analysis** (syntax-tree analysis of Python, JavaScript and TypeScript; rule-based checks of infrastructure, access policies, secrets and licences) |
 | **Reliability** | Non-zero stochastic variance (model hallucinations, prompt drift) | **Zero Hallucination Guarantee** (Identical commit trees produce mathematically identical EBITDA findings) |
 | **Data Sovereignty** | API token pass-through to third-party generative inference endpoints | **The Sovereignty Protocol**: 100% ephemeral RAM sandboxing, zero disk writes, zero model retraining, instant memory wipe |
 | **Risk Framework** | Qualitative narrative reports | **4-Quadrant Infrastructure Risk Quantification** ($Q_1$ Architecture, $Q_2$ Security & GPL, $Q_3$ Cloud IaC, $Q_4$ Team Keyman) |
@@ -53,7 +53,7 @@ Veridence converts subjective engineering surveys into **deterministic balance s
 ```mermaid
 flowchart TD
     subgraph QuantModel["4-Quadrant Infrastructure Risk Quantification Engine"]
-        Q1["<b>Quadrant 1: Architectural Debt</b><br/>• AST Cyclomatic Complexity<br/>• Circular Dependency Graph<br/>• Senior Refactor Dollar Remediation"]
+        Q1["<b>Quadrant 1: Architectural Debt</b><br/>• Function Complexity (syntax tree)<br/>• Oversized Source Files<br/>• Senior Refactor Dollar Remediation"]
         Q2["<b>Quadrant 2: Security and Copyleft License</b><br/>• Viral GPL / AGPL Detection<br/>• Proprietary Commercial Contamination<br/>• High-Liability CVEs and Secret Leaks"]
         Q3["<b>Quadrant 3: Cloud and IaC Infrastructure</b><br/>• Terraform / Kubernetes Misconfigurations<br/>• Public Storage and Ingress Drift<br/>• Air-Gapped VPC Boundary Failures"]
         Q4["<b>Quadrant 4: Team Velocity and Keyman</b><br/>• Git Commit Entropy and Churn<br/>• Bus Factor &lt; 2 Analysis<br/>• Single-Engineer IP Concentration"]
@@ -81,13 +81,13 @@ $$
 Where:
 
 1. **$Q_1$: Architectural Debt Remediation Cost**
-   Tree-sitter Abstract Syntax Trees (ASTs) calculate complexity exceedance over maintainable thresholds ($M_{\text{threshold}} = 15$):
+   Syntax trees (Python's own parser; tree-sitter for JavaScript and TypeScript) give each function's cyclomatic complexity and its exceedance over the maintainable threshold ($M_{\text{threshold}} = 15$):
 
    $$
    Q_1 = \sum_{f \in \text{Functions}} \max(0, C(f) - M_{\text{threshold}}) \times H_{\text{refactor}} \times R_{\text{senior}}
    $$
 
-   *(where $H_{\text{refactor}}$ is benchmark hours per complexity unit, and $R_{\text{senior}} = 175\text{ USD/hr}$ is benchmark engineering labor).*
+   *(where $H_{\text{refactor}}$ is refactoring hours per complexity unit, 4 in the current engine, and $R_{\text{senior}} = 175\text{ USD/hr}$ is benchmark engineering labor).*
 
 2. **$Q_2$: Copyleft and Security Legal Liability**
    Evaluates direct and transitive dependency trees against the SPDX license index. Viral licenses (GPL-2.0, GPL-3.0, AGPL-3.0) integrated into proprietary commercial software impose a deterministic re-engineering liability ($L_{\text{rewrite}}$) or statutory exposure penalty.
@@ -116,13 +116,13 @@ sequenceDiagram
     actor DealTeam as PE Deal Team (Slack)
     participant SlackBot as Veridence Slack Bot
     participant RAM as Volatile RAM Sandbox
-    participant AST as Deterministic AST Engine
+    participant AST as Deterministic Analysis Engine
     participant PDF as IC PDF Certificate Generator
 
     DealTeam->>SlackBot: /veridence audit <target_repo_url>
     SlackBot->>RAM: Stream repo zipball ephemerally
     Note over RAM: In-Memory Virtual tmpfs (Zero Disk Writes)
-    RAM->>AST: Parse AST, licenses, IaC, commit logs
+    RAM->>AST: Analyse source, licences, IaC
     AST->>AST: Quantify 4-Quadrant EBITDA Liabilities
     AST-->>RAM: Wipe memory & destroy RAM sandbox
     Note over RAM: Cryptographic Zero-Fill Purge Complete
@@ -131,7 +131,7 @@ sequenceDiagram
 ```
 
 * **Ephemeral In-Memory Processing:** Codebases are streamed into volatile virtual memory (`tmpfs`). Nothing is written to physical disk.
-* **Zero Model Training:** 100% deterministic local AST parsing and regex rules. Code is never transmitted to OpenAI, Anthropic, or external model providers.
+* **Zero Model Training:** 100% deterministic local syntax-tree analysis and pattern rules. Code is never transmitted to OpenAI, Anthropic, or external model providers.
 * **Instant Cryptographic Destruction:** Volatile RAM buffers are overwritten with zeros and destroyed within milliseconds of report dispatch.
 
 ---
