@@ -140,14 +140,16 @@ sequenceDiagram
 
 Veridence supports flexible repository ingestion across all major VCS providers and virtual data rooms.
 
-### Option A: The 1-Click GitHub App (Recommended — Zero Tokens)
+### Option A: The GitHub App (Recommended — Zero Tokens)
 * **Audience:** Non-technical deal leads, investment associates, and target engineering leads.
 * **How it works:**
-  1. The target repository admin clicks **[Install GitHub App](https://github.com/apps/veridence)**.
-  2. Select organization and pick "All repositories" or "Select repositories".
-  3. Click **Install & Authorize**.
+  1. In your Slack workspace, run `/veridence github`. Veridence replies with a link that belongs to your workspace.
+  2. Send the link to an owner of the GitHub account that holds the target repositories. They sign in to GitHub and, if the [Veridence GitHub App](https://github.com/apps/veridence) is not installed yet, install it, picking "All repositories" or "Only select repositories".
+  3. That connects the account to your workspace. Only an owner of the GitHub account can do it.
   4. In Slack, run: `/veridence audit https://github.com/target-org/private-repo`.  
      *Cryptographic installation tokens authenticate automatically. Zero token management required.*
+
+  Starting from GitHub also works: install the app first, then use the **Add Veridence to Slack** button on the page that follows.
 
 ### Option B: 1-Time Workspace Personal Access Token (PAT) Link
 If your team does not have organization admin rights to install GitHub Apps, configure a 1-time PAT:
@@ -173,8 +175,8 @@ In traditional M&A diligence, sellers share sanitized ZIP archives through secur
 /veridence audit https://s3.amazonaws.com/dealroom-escrow/snapshot.zip?X-Amz-Signature=...
 ```
 
-### Option D: Air-Gapped Web Console Drag-and-Drop
-For offline or highly classified targets, open the **[Veridence Web Console](https://www.veridence.agiphi.com/?view=dashboard)** and drag any target `.zip` file directly into the browser. The report generates locally without external cloud connectivity.
+### Option D: Web Console
+For teams working outside Slack, open the **[Veridence Web Console](https://www.veridence.agiphi.com/?view=dashboard)**, enter your evaluation credential or license key and the repository URL (add a GitHub token for a private repository). The deterministic scan runs and the report appears on screen.
 
 ---
 
@@ -182,12 +184,16 @@ For offline or highly classified targets, open the **[Veridence Web Console](htt
 
 | Command | Operational Purpose |
 | :--- | :--- |
-| `/veridence help` | Displays interactive slash command directory, operational guidelines, and diligence syntax. |
-| `/veridence audit <url> [token]` | Executes an ephemeral RAM audit on target repository and renders an executive Block Kit scorecard. |
-| `/veridence watch <url>` | *(Commercial Tiers)* Subscribes channel to 24/7 continuous commit surveillance; alerts deal rooms to newly introduced EBITDA liabilities. |
-| `/veridence repos` | Lists all active target repositories currently monitored within this Slack workspace. |
-| `/veridence auth <token>` | Registers a workspace-wide GitHub PAT for seamless private repository scanning. |
-| `/veridence register <key>` | Binds an institutional license key to the workspace for enterprise quotas and custom SLAs. |
+| `/veridence help` | Shows the command directory with your workspace's license, plan and connections. |
+| `/veridence audit <url> [token]` | Executes an ephemeral RAM audit on the target repository and renders an executive Block Kit scorecard with a PDF report link. |
+| `/veridence github` | Returns the link that connects a GitHub account to this workspace, so private repositories work without tokens. |
+| `/veridence auth <token>` | Registers a workspace-wide GitHub PAT for private repository scanning. |
+| `/veridence watch <url>` | *(Paid Tiers)* Adds the repository to continuous commit surveillance. Alerts go to the channel chosen when Veridence was added to Slack. |
+| `/veridence unwatch <url>` | Removes a repository from surveillance. |
+| `/veridence list` | Lists the repositories this workspace is monitoring. |
+| `/veridence liabilities` | Summarises the EBITDA liabilities from this workspace's recent audits. |
+| `/veridence status` | Shows the workspace's license, plan, connected GitHub accounts and alert channel. |
+| `/veridence register <key>` | Binds an institutional license key to the workspace. |
 
 ---
 
@@ -204,7 +210,7 @@ Every audit automatically generates an audit-grade, cryptographically signed PDF
 ## ⚖️ Licensing & Commercial Terms
 
 * **Academic Citation:** Citations must reference the [August 2026 Technical Report](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification).
-* **Commercial Inquiries:** Enterprise subscriptions, custom diligence SLAs, and Sovereign VPC Escrow are invoiced via Net 15/30 Domestic Wire or GCP Marketplace Private Offer.
+* **Commercial Inquiries:** Enterprise subscriptions, custom diligence SLAs, and Sovereign VPC Escrow are invoiced via Net 15/30 Domestic Wire or GCP / AWS Marketplace Private Offer.
 * **Licensing Desk:** [contact@agiphi.com](mailto:contact@agiphi.com) | [Veridence Gateway](https://www.veridence.agiphi.com/gateway)
 
 ---
