@@ -46,5 +46,5 @@ sequenceDiagram
 * Immediately upon completion of calculations, the memory sandbox is destroyed.
 * Memory pages are scrubbed and zero-filled, guaranteeing that no remnants survive past the execution lifecycle.
 
-### 4. SOC-2 & Air-Gapped Sovereign VPC Compatibility
+### 4. Dedicated VPC Deployment
 * For enterprise funds with sovereign data mandates, Veridence deploys within dedicated, air-gapped Virtual Private Clouds (VPCs) on Oracle Cloud Infrastructure (OCI) or Google Cloud Platform (GCP).

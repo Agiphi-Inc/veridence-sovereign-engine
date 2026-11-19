@@ -2,7 +2,7 @@
 
 [![ResearchGate Paper](https://img.shields.io/badge/ResearchGate-August%202026%20Technical%20Report-00CCBB?logo=researchgate&logoColor=white)](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification)
 [![Data Sovereignty](https://img.shields.io/badge/Security-The%20Sovereignty%20Protocol%20(Air--Gapped)-blue)](https://www.veridence.agiphi.com)
-[![Slack App](https://img.shields.io/badge/Slack%20App-Certified%20Bot-4A154B?logo=slack&logoColor=white)](https://www.veridence.agiphi.com/slack)
+[![Slack App](https://img.shields.io/badge/Slack-Add%20to%20Slack-4A154B?logo=slack&logoColor=white)](https://www.veridence.agiphi.com/slack)
 [![Web Console](https://img.shields.io/badge/Live%20Cockpit-Web%20Console-38BDF8)](https://www.veridence.agiphi.com/?view=dashboard)
 [![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Institutional%20SLA-green)](#licensing--commercial-terms)
 
@@ -203,7 +203,7 @@ Every audit automatically generates an audit-grade, cryptographically signed PDF
 * **EBITDA Purchase Price Adjustment Schedule**
 * **100-Day Post-Merger Remediation Roadmap** (Phase 1: Days 1–30 Stop the Bleed; Phase 2: Days 31–60 Structural; Phase 3: Days 61–100 Optimization)
 * **SPDX License & GPL Infection Audit**
-* **SOC-2 & Air-Gapped Sovereign EPC Attestation**
+* **Statement of how the code was handled** (analysed in memory, nothing stored)
 
 ---
 
