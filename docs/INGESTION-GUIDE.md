@@ -10,7 +10,7 @@ flowchart TD
     
     Ingest --> App["<b>Channel 1: GitHub App</b><br/>• Zero developer tokens<br/>• Connected by an account owner via /veridence github<br/>• Recommended for non-technical teams"]
     Ingest --> PAT["<b>Channel 2: 1-Time Workspace PAT</b><br/>• Classic GitHub PAT with 'repo' scope<br/>• Bound once via /veridence auth<br/>• Shared by the whole Slack workspace"]
-    Ingest --> VDR["<b>Channel 3: Virtual Data Rooms</b><br/>• Google Drive / Box / AWS S3<br/>• Pre-signed HTTPS download links<br/>• Ephemeral RAM extraction"]
+    Ingest --> VDR["<b>Channel 3: Virtual Data Rooms</b><br/>• Google Drive / Box / AWS S3<br/>• Pre-signed HTTPS download links<br/>• Read in memory; not stored after the audit"]
     Ingest --> Web["<b>Channel 4: Web Console</b><br/>• Repository URL and license key<br/>• Optional GitHub token for private repos<br/>• On-screen report"]
 
     classDef chan fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
@@ -35,7 +35,7 @@ The simplest pathway for deal teams and target companies. No developer settings 
    ```bash
    /veridence audit https://github.com/target-org/acquirer-target-core
    ```
-   *The Veridence bot uses GitHub App cryptographic installation tokens behind the scenes. Zero token management.*
+   *The Veridence bot uses short-lived GitHub App installation tokens behind the scenes, so nobody has to manage a token.*
 
 Starting from GitHub also works: install the app first, then use the **Add Veridence to Slack** button on the page that follows, and the account is connected to the workspace you add.
 

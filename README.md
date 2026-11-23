@@ -1,219 +1,60 @@
-# Veridence: Deterministic Algorithmic Technical Due Diligence
+# Veridence: public reference
 
-[![ResearchGate Paper](https://img.shields.io/badge/ResearchGate-August%202026%20Technical%20Report-00CCBB?logo=researchgate&logoColor=white)](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification)
-[![Data Sovereignty](https://img.shields.io/badge/Security-The%20Sovereignty%20Protocol%20(Air--Gapped)-blue)](https://www.veridence.agiphi.com)
-[![Slack App](https://img.shields.io/badge/Slack-Add%20to%20Slack-4A154B?logo=slack&logoColor=white)](https://www.veridence.agiphi.com/slack)
-[![Web Console](https://img.shields.io/badge/Live%20Cockpit-Web%20Console-38BDF8)](https://www.veridence.agiphi.com/?view=dashboard)
-[![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Institutional%20SLA-green)](#licensing--commercial-terms)
+Veridence is Agiphi's verification engine. It reads a software repository at one exact commit and reports what it finds: security problems, open-source licence obligations, risky dependencies, infrastructure misconfiguration, code that is hard to change, and how much of the code depends on one or two people. Each finding has a location, a risk rating and a cost-to-fix range.
 
-> **Official Technical Specification & Sovereign Due Diligence Architecture**  
-> Aligned with the peer-reviewed technical report:  
-> **"Deterministic Algorithmic Technical Due Diligence: Air-Gapped TDD, The Sovereignty Protocol, and 4-Quadrant Infrastructure Risk Quantification"**  
-> *Author:* Precious O. Agi, Agiphi Inc. (August 2026)  
-> *Academic Publication:* [ResearchGate Preprint 404363566](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification)  
-> *Case Study:* [Production Case Study](https://preciousagi.agiphi.com/case-studies/technical-due-diligence)
+Agiphi, Inc. builds and verifies financial infrastructure. Veridence is used for technical due diligence and for audits of trading and payments systems.
 
----
+- Product: https://www.veridence.agiphi.com
+- Sample report: https://www.veridence.agiphi.com/sample-report
+- Methodology (every rule and every published estimate): https://www.veridence.agiphi.com/methodology
+- Company: https://agiphi.com
 
-## 🏛️ Academic & Historical Provenance: What It Was vs. What It Is Now
+This repository holds public documentation only. The engine's source code is not published here.
 
-Veridence evolved across two foundational research phases. To preserve academic citation continuity, our historical exploratory implementation is maintained as an immutable historical archive.
+## How it works
 
-```mermaid
-flowchart LR
-    A["<b>April 2026 Research Report</b><br/><i>'Agentic Forensic Reasoning'</i><br/>[RG: 412115837]"] -->|Architectural Redesign| B["<b>August 2026 Technical Report</b><br/><i>'Deterministic Algorithmic TDD'</i><br/>[RG: 404363566]"]
-    
-    A -.-> C["<b>Historical Archive</b><br/>github.com/agiphi/Veridence<br/><i>(Frozen for Citation Integrity)</i>"]
-    B -.-> D["<b>Production Engine</b><br/>github.com/Agiphi-Inc/veridence-sovereign-engine<br/><i>(Deterministic Analysis & Sovereignty Enclave)</i>"]
+1. **One exact commit.** An audit reads one commit of a repository, so the result can be reproduced.
+2. **Code analysis.** Python, JavaScript and TypeScript are parsed into syntax trees and checked by the structure of the code: hard-coded secrets, SQL built from variables, weak hashing, `eval`/`exec`, shell commands, unsafe deserialisation, TLS checks turned off, discarded exceptions and function complexity. Infrastructure files, access policies and other languages get simpler text-pattern checks.
+3. **Licences.** Licences are read from what the repository declares (licence files, manifest fields, SPDX tags) and checked against the SPDX licence list.
+4. **Dependencies.** Pinned dependencies from npm, PyPI, Go, Cargo, Maven, RubyGems and Composer manifests are looked up in deps.dev for their licence and published security advisories. Only package names and versions are sent, never code.
+5. **Key-person risk.** Commit history for the 12 months before the reviewed commit shows how concentrated the authorship is.
+6. **Pricing.** Each finding gets a risk rating (high, medium, low) and a cost-to-fix range: published engineering hours × $175 an hour. Findings in test, example and documentation code are reported separately and are not priced.
 
-    classDef legacy fill:#1e1b4b,stroke:#818cf8,stroke-width:1px,color:#e0e7ff;
-    classDef current fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
-    class A,C legacy;
-    class B,D current;
-```
+The engine is deterministic. There is no AI model and nothing is sampled, so the same commit always gives the same report.
 
-### The Architectural Evolution
+## What it does not claim
 
-| Dimension | Historical Research Archive (April 2026) | Current Sovereign Production Architecture (August 2026) |
-| :--- | :--- | :--- |
-| **Foundational Publication** | *"Agentic Forensic Reasoning for Technical Due Diligence"* ([ResearchGate 412115837](https://www.researchgate.net/publication/412115837_Agentic_Forensic_Reasoning_for_Technical_Due_Diligence_The_Sovereignty_Protocol_and_Infrastructure_Risk_F_Quantification)) | *"Deterministic Algorithmic Technical Due Diligence: Air-Gapped TDD, The Sovereignty Protocol, and 4-Quadrant Infrastructure Risk Quantification"* ([ResearchGate 404363566](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification)) |
-| **Analysis Engine** | Agentic LLM reasoning chains & multi-turn heuristic prompting | **100% Deterministic Static Analysis** (syntax-tree analysis of Python, JavaScript and TypeScript; rule-based checks of infrastructure, access policies, secrets and licences) |
-| **Reliability** | Non-zero stochastic variance (model hallucinations, prompt drift) | **Zero Hallucination Guarantee** (Identical commit trees produce mathematically identical EBITDA findings) |
-| **Data Sovereignty** | API token pass-through to third-party generative inference endpoints | **The Sovereignty Protocol**: 100% ephemeral RAM sandboxing, zero disk writes, zero model retraining, instant memory wipe |
-| **Risk Framework** | Qualitative narrative reports | **4-Quadrant Infrastructure Risk Quantification** ($Q_1$ Architecture, $Q_2$ Security & GPL, $Q_3$ Cloud IaC, $Q_4$ Team Keyman) |
-| **Primary Interface** | Prototype web dashboard | **Slack Deal-Room Bot (`/veridence`)**, Web Console Cockpit, and Model Context Protocol (MCP) server |
-| **Repository Status** | [Historical Archive (`agiphi/Veridence`)](https://github.com/agiphi/Veridence) *(Frozen)* | [Sovereign Engine (`Agiphi-Inc/veridence-sovereign-engine`)](https://github.com/Agiphi-Inc/veridence-sovereign-engine) *(Active Production)* |
+- Finding nothing does not prove a codebase is secure.
+- A static review cannot show how a system behaves in production or under load.
+- Costs to fix are engineering estimates. They are not valuations.
+- Languages beyond Python, JavaScript and TypeScript get pattern checks only, with more false positives.
+- The hosted service is not air-gapped. It calls the code host, Slack, deps.dev and Stripe to do its work. Code is read in memory and is not stored after the audit; only the findings are kept.
+- Agiphi does not hold a SOC 2 or ISO 27001 report.
 
----
+## Where it runs
 
-## 🔬 The 4-Quadrant Infrastructure Risk Quantification Model
+- **Slack:** `/veridence audit <repository>` posts the result and a PDF report; `/veridence watch` alerts the channel only when findings change.
+- **GitHub:** the [Veridence GitHub App](https://github.com/apps/veridence) adds a check to each pull request that fails only when the pull request adds findings.
+- **Web account, REST API and MCP server** for teams working outside Slack.
 
-Veridence converts subjective engineering surveys into **deterministic balance sheet purchase price adjustments** engineered for Private Equity sponsors, Corporate M&A acquirers, and General Counsel.
+How to connect private repositories: [docs/INGESTION-GUIDE.md](docs/INGESTION-GUIDE.md).
 
-```mermaid
-flowchart TD
-    subgraph QuantModel["4-Quadrant Infrastructure Risk Quantification Engine"]
-        Q1["<b>Quadrant 1: Architectural Debt</b><br/>• Function Complexity (syntax tree)<br/>• Oversized Source Files<br/>• Senior Refactor Dollar Remediation"]
-        Q2["<b>Quadrant 2: Security and Copyleft License</b><br/>• Viral GPL / AGPL Detection<br/>• Proprietary Commercial Contamination<br/>• High-Liability CVEs and Secret Leaks"]
-        Q3["<b>Quadrant 3: Cloud and IaC Infrastructure</b><br/>• Terraform / Kubernetes Misconfigurations<br/>• Public Storage and Ingress Drift<br/>• Air-Gapped VPC Boundary Failures"]
-        Q4["<b>Quadrant 4: Team Velocity and Keyman</b><br/>• Git Commit Entropy<br/>• Bus Factor &lt; 2 Analysis<br/>• Single-Engineer IP Concentration"]
-    end
+## Plans
 
-    Q1 --> Schedule["<b>Investment Committee Purchase Price Adjustment Schedule</b><br/><i>E_total = Q1 + Q2 + Q3 + Q4</i>"]
-    Q2 --> Schedule
-    Q3 --> Schedule
-    Q4 --> Schedule
+A free preview shows the risk, the cost to fix and the name of every finding for one repository. Paid plans unlock locations, evidence, fixes, PDF and CSV. Current prices: https://www.veridence.agiphi.com/slack#pricing
 
-    classDef boxStyle fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
-    classDef totalStyle fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#ffffff;
-    class Q1,Q2,Q3,Q4 boxStyle;
-    class Schedule totalStyle;
-```
+## Research history
 
-### Mathematical Formulation
+Veridence started as research on agentic (AI-assisted) review in April 2026 and was redesigned as a deterministic engine in August 2026. Both technical reports are preprints on ResearchGate; they are not peer-reviewed. Some terms in their titles ("air-gapped", "sovereignty") describe an earlier design and do not describe the hosted service today.
 
-Total recommended EBITDA liability adjustment, denoted as $E_{\text{total}}$, is computed as the sum of liabilities quantified across four orthogonal quadrants:
+- August 2026 report: https://www.researchgate.net/publication/404363566
+- April 2026 report (superseded): https://www.researchgate.net/publication/412115837
 
-$$
-E_{\text{total}} = Q_1(\text{Architecture}) + Q_2(\text{Security and License}) + Q_3(\text{Cloud and IaC}) + Q_4(\text{Team and Velocity})
-$$
+The older documents in `docs/` are kept so existing links still work; each one says what has changed.
 
-Where:
+## Contact
 
-1. **$Q_1$: Architectural Debt Remediation Cost**
-   Syntax trees (Python's own parser; tree-sitter for JavaScript and TypeScript) give each function's cyclomatic complexity and its exceedance over the maintainable threshold ($M_{\text{threshold}} = 15$):
-
-   $$
-   Q_1 = \sum_{f \in \text{Functions}} \max(0, C(f) - M_{\text{threshold}}) \times H_{\text{refactor}} \times R_{\text{senior}}
-   $$
-
-   *(where $H_{\text{refactor}}$ is refactoring hours per complexity unit, 4 in the current engine, and $R_{\text{senior}} = 175\text{ USD/hr}$ is benchmark engineering labor).*
-
-2. **$Q_2$: Copyleft and Security Legal Liability**
-   Evaluates direct and transitive dependency trees against the SPDX license index. Viral licenses (GPL-2.0, GPL-3.0, AGPL-3.0) integrated into proprietary commercial software impose a deterministic re-engineering liability ($L_{\text{rewrite}}$) or statutory exposure penalty.
-
-3. **$Q_3$: Cloud and IaC Governance Debt**
-   Scans Terraform, CloudFormation, and Helm charts for unencrypted storage, missing IAM boundaries, and multi-cloud architectural fragmentation.
-
-4. **$Q_4$: Team Entropy and Keyman Risk**
-   Computes the **Shannon Entropy** of author commits across the target repository:
-
-   $$
-   H(C) = -\sum_{i=1}^n p(a_i) \log_2 p(a_i)
-   $$
-
-   When author distribution reveals a **Bus Factor $< 2$** (one engineer authored $>70\%$ of core IP), an executive retention escrow reserve is allocated.
-
----
-
-## 🛡️ The Sovereignty Protocol (Air-Gapped RAM Sandbox)
-
-In high-stakes corporate acquisitions, target source code represents critical proprietary IP. Veridence guarantees zero-retention code privacy through an ephemeral RAM enclave architecture:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor DealTeam as PE Deal Team (Slack)
-    participant SlackBot as Veridence Slack Bot
-    participant RAM as Volatile RAM Sandbox
-    participant AST as Deterministic Analysis Engine
-    participant PDF as IC PDF Certificate Generator
-
-    DealTeam->>SlackBot: /veridence audit <target_repo_url>
-    SlackBot->>RAM: Stream repo zipball ephemerally
-    Note over RAM: In-Memory Virtual tmpfs (Zero Disk Writes)
-    RAM->>AST: Analyse source, licences, IaC
-    AST->>AST: Quantify 4-Quadrant EBITDA Liabilities
-    AST-->>RAM: Wipe memory & destroy RAM sandbox
-    Note over RAM: Cryptographic Zero-Fill Purge Complete
-    AST->>PDF: Generate signed IC Due Diligence PDF
-    SlackBot->>DealTeam: Deliver Block Kit Scorecard & PDF Certificate in < 60s
-```
-
-* **Ephemeral In-Memory Processing:** Codebases are streamed into volatile virtual memory (`tmpfs`). Nothing is written to physical disk.
-* **Zero Model Training:** 100% deterministic local syntax-tree analysis and pattern rules. Code is never transmitted to OpenAI, Anthropic, or external model providers.
-* **Instant Cryptographic Destruction:** Volatile RAM buffers are overwritten with zeros and destroyed within milliseconds of report dispatch.
-
----
-
-## 🔌 Private Repository & Multi-Platform Ingestion Guide
-
-Veridence supports flexible repository ingestion across all major VCS providers and virtual data rooms.
-
-### Option A: The GitHub App (Recommended — Zero Tokens)
-* **Audience:** Non-technical deal leads, investment associates, and target engineering leads.
-* **How it works:**
-  1. In your Slack workspace, run `/veridence github`. Veridence replies with a link that belongs to your workspace.
-  2. Send the link to an owner of the GitHub account that holds the target repositories. They sign in to GitHub and, if the [Veridence GitHub App](https://github.com/apps/veridence) is not installed yet, install it, picking "All repositories" or "Only select repositories".
-  3. That connects the account to your workspace. Only an owner of the GitHub account can do it.
-  4. In Slack, run: `/veridence audit https://github.com/target-org/private-repo`.  
-     *Cryptographic installation tokens authenticate automatically. Zero token management required.*
-
-  Starting from GitHub also works: install the app first, then use the **Add Veridence to Slack** button on the page that follows.
-
-### Option B: 1-Time Workspace Personal Access Token (PAT) Link
-If your team does not have organization admin rights to install GitHub Apps, configure a 1-time PAT:
-1. In GitHub, go to **Settings** ➔ **Developer settings** ➔ **Personal access tokens (classic)** ➔ **Generate new token**.
-2. Select scopes: Check only **`repo`** (Full control of private repositories).
-3. Copy the generated token (`ghp_...`).
-4. In Slack, run this command **once per workspace**:
-   ```bash
-   /veridence auth ghp_YourPersonalAccessTokenHere
-   ```
-5. Every deal team member in that channel can now audit private repositories seamlessly without ever needing a token again.
-
-### Option C: Virtual Data Rooms (VDR) & Cloud Storage Escrow Links
-In traditional M&A diligence, sellers share sanitized ZIP archives through secure data room links:
-```bash
-# Google Drive Shared Link
-/veridence audit https://drive.google.com/file/d/1A2B3C4D5E.../view
-
-# Box.com Enterprise Link
-/veridence audit https://app.box.com/s/abcdef123456...
-
-# Pre-signed AWS S3 / Cloudflare R2 Archive Link
-/veridence audit https://s3.amazonaws.com/dealroom-escrow/snapshot.zip?X-Amz-Signature=...
-```
-
-### Option D: Web Console
-For teams working outside Slack, open the **[Veridence Web Console](https://www.veridence.agiphi.com/?view=dashboard)**, enter your evaluation credential or license key and the repository URL (add a GitHub token for a private repository). The deterministic scan runs and the report appears on screen.
-
----
-
-## 🤖 Slack Deal-Room Bot Commands
-
-| Command | Operational Purpose |
-| :--- | :--- |
-| `/veridence help` | Shows the command directory with your workspace's license, plan and connections. |
-| `/veridence audit <url> [token]` | Executes an ephemeral RAM audit on the target repository and renders an executive Block Kit scorecard with a PDF report link. |
-| `/veridence github` | Returns the link that connects a GitHub account to this workspace, so private repositories work without tokens. |
-| `/veridence auth <token>` | Registers a workspace-wide GitHub PAT for private repository scanning. |
-| `/veridence watch <url>` | *(Paid Tiers)* Adds the repository to continuous commit surveillance. Alerts go to the channel chosen when Veridence was added to Slack. |
-| `/veridence unwatch <url>` | Removes a repository from surveillance. |
-| `/veridence list` | Lists the repositories this workspace is monitoring. |
-| `/veridence liabilities` | Summarises the EBITDA liabilities from this workspace's recent audits. |
-| `/veridence status` | Shows the workspace's license, plan, connected GitHub accounts and alert channel. |
-| `/veridence register <key>` | Binds an institutional license key to the workspace. |
-
----
-
-## 📄 Investment Committee Due Diligence Certificate
-
-Every audit automatically generates an audit-grade, cryptographically signed PDF certificate:
-* **EBITDA Purchase Price Adjustment Schedule**
-* **100-Day Post-Merger Remediation Roadmap** (Phase 1: Days 1–30 Stop the Bleed; Phase 2: Days 31–60 Structural; Phase 3: Days 61–100 Optimization)
-* **SPDX License & GPL Infection Audit**
-* **Statement of how the code was handled** (analysed in memory, nothing stored)
-
----
-
-## ⚖️ Licensing & Commercial Terms
-
-* **Academic Citation:** Citations must reference the [August 2026 Technical Report](https://www.researchgate.net/publication/404363566_Deterministic_Algorithmic_Technical_Due_Diligence_Air-Gapped_TDD_The_Sovereignty_Protocol_and_4-Quadrant_Infrastructure_Risk_F_Quantification).
-* **Commercial Inquiries:** Enterprise subscriptions, custom diligence SLAs, and Sovereign VPC Escrow are invoiced via Net 15/30 Domestic Wire or GCP / AWS Marketplace Private Offer.
-* **Licensing Desk:** [contact@agiphi.com](mailto:contact@agiphi.com) | [Veridence Gateway](https://www.veridence.agiphi.com/gateway)
-
----
+contact@agiphi.com · Agiphi, Inc., 30 N Gould St, Sheridan, WY 82801
 
 ### Citation
 
@@ -221,10 +62,12 @@ Every audit automatically generates an audit-grade, cryptographically signed PDF
 @techreport{agi2026deterministic,
   title={Deterministic Algorithmic Technical Due Diligence: Air-Gapped TDD, The Sovereignty Protocol, and 4-Quadrant Infrastructure Risk Quantification},
   author={Agi, Precious O.},
-  institution={Agiphi Inc.},
+  institution={Agiphi, Inc.},
   year={2026},
   month={August},
   doi={10.13140/RG.2.2.17983.52648},
   url={https://www.researchgate.net/publication/404363566}
 }
 ```
+
+The title above is the report's published title and is kept as is for citation.

@@ -1,87 +1,22 @@
-# The 4-Quadrant Infrastructure Risk Quantification Framework
+# What Veridence checks, and how it prices findings
 
-Veridence models codebase risk not as abstract "code quality scores" or subjective developer feedback, but as **deterministic, balance sheet purchase price adjustments**, denoted as $E_{\text{total}}$. 
+This page replaces an earlier "4-Quadrant" document that summed findings into an "EBITDA liability adjustment". Veridence no longer does that: single dollar totals double-counted and were not defensible.
 
-During mergers and acquisitions (M&A), unaddressed architectural debt, security vulnerabilities, and licensing infractions translate directly into post-acquisition capital expenditure.
+Today every finding has:
 
----
+- a **location** (file and line, where the check allows),
+- a **risk rating** (high, medium, low), and
+- a **cost-to-fix range**: published engineering hours × $175 an hour. A second place in the same file adds less than the first.
 
-## Mathematical Formulation
+The checks still cover four areas:
 
-$$
-E_{\text{total}} = Q_1(\text{Architecture}) + Q_2(\text{Security and License}) + Q_3(\text{Cloud and IaC}) + Q_4(\text{Team and Velocity})
-$$
+| Area | Examples |
+| --- | --- |
+| Code | Function complexity, swallowed errors, hard-coded secrets, unsafe patterns (syntax-tree checks for Python, JavaScript and TypeScript) |
+| Licences and dependencies | Declared licences against the SPDX list; GPL, AGPL and SSPL in production dependencies; dependency advisories rated 7.0 or higher |
+| Infrastructure | Infrastructure-as-code and access-policy patterns |
+| Team | Concentration of commits in one or two people over the last 12 months |
 
-```mermaid
-flowchart TD
-    subgraph QuantEngine["4-Quadrant Infrastructure Risk Framework"]
-        direction TB
-        Q1["<b>Quadrant 1: Architectural Debt</b><br/>• Function Complexity (syntax tree)<br/>• Oversized Source Files<br/>• Discarded Exceptions"]
-        Q2["<b>Quadrant 2: Security and Copyleft</b><br/>• Viral GPL / AGPL Detection<br/>• Hardcoded Secrets and API Keys<br/>• Transitive Dependency CVEs"]
-        Q3["<b>Quadrant 3: Cloud and IaC Enclaves</b><br/>• Terraform / Kubernetes Drift<br/>• Public Storage and Ingress Drift<br/>• Air-Gapped VPC Boundaries"]
-        Q4["<b>Quadrant 4: Team and Keyman Dependency</b><br/>• Git Commit Entropy<br/>• Bus Factor &lt; 2 Analysis<br/>• Maintainer Concentration"]
-    end
+Findings in test, example and documentation code are listed separately and are not priced.
 
-    Q1 --> Schedule["<b>Investment Committee Purchase Price Adjustment Schedule</b><br/><i>E_total = Q1 + Q2 + Q3 + Q4</i>"]
-    Q2 --> Schedule
-    Q3 --> Schedule
-    Q4 --> Schedule
-
-    classDef quad fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
-    classDef sched fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#ffffff;
-    class Q1,Q2,Q3,Q4 quad;
-    class Schedule sched;
-```
-
----
-
-### Quadrant 1: Architectural & Codebase Debt ($Q_1$)
-
-Target codebases often accumulate unrefactored legacy debt that reduces post-merger development velocity and requires significant engineering reinvestment.
-
-* **Cyclomatic Complexity:** Python files are parsed with Python's own parser, and JavaScript and TypeScript files with tree-sitter. Functions whose McCabe cyclomatic complexity exceeds the maintainability threshold ($M_{\text{threshold}} = 15$) are identified deterministically from the syntax tree:
-  $$
-  Q_1 = \sum_{f \in \text{Functions}} \max(0, C(f) - M_{\text{threshold}}) \times H_{\text{refactor}} \times R_{\text{senior}}
-  $$
-  *(where $H_{\text{refactor}}$ represents refactoring hours per complexity unit, 4 in the current engine, and $R_{\text{senior}} = 175\text{ USD/hr}$ represents benchmark engineering labor).*
-* **Oversized Source Files:** Source files of more than 1,000 lines are reported, in any supported language.
-* **Discarded Exceptions:** Handlers that catch every error and do nothing with it are reported.
-
-Files in other languages, and files that do not parse, are checked by text patterns instead of by syntax tree. Every finding in a report states which method found it.
-
----
-
-### Quadrant 2: Security & Copyleft Licensing Liability ($Q_2$)
-
-Software license breaches represent statutory and commercial liabilities that can force acquirers to open-source proprietary IP or defend against copyright lawsuits.
-
-* **SPDX License Dependency Mapping:** Ingests `package.json` and its lockfiles, `requirements.txt`, `poetry.lock`, `go.mod`, `pom.xml`, `Cargo.lock`, `Gemfile.lock` and `composer.lock` to catalog every third-party component. The licence of each pinned component is looked up in the public package registry and classified against the SPDX licence list. Licences the repository itself declares (licence files, manifest fields, `SPDX-License-Identifier` tags) are read the same way; a file that merely mentions a licence is not a finding.
-* **Viral Copyleft Infection (GPL/AGPL):** Evaluates licensing terms against proprietary commercial use. If viral licenses (GPL-2.0, GPL-3.0, AGPL-3.0) are statically linked into proprietary core assets, Veridence quantifies:
-  $$
-  L_{\text{copyleft}} = \text{Cost to Clean-Room Re-Engineer Infiltrated Modules}
-  $$
-* **High-Liability CVEs:** Flags published vulnerabilities with a CVSS score of 7.0 or more in production dependencies whose version is pinned.
-* **Hardcoded Secret Detection:** High-entropy regex scanning detects private keys, cloud tokens, database connection URIs, and authentication secrets in the audited commit.
-
----
-
-### Quadrant 3: Cloud & Infrastructure Governance ($Q_3$)
-
-Infrastructure-as-Code (IaC) configuration manifests determine whether target cloud deployments are resilient, sovereign, and cost-effective.
-
-* **IaC Static Analysis:** Evaluates Terraform (`.tf`), Kubernetes manifests (`.yaml`), Dockerfiles, and CloudFormation templates.
-* **Public Egress & S3 Bucket Exposure:** Identifies misconfigured cloud storage resources lacking server-side encryption or exposing public read/write access.
-* **Sovereign VPC Peering:** Detects unencrypted cross-region traffic, missing egress gateways, and violation of air-gapped data sovereignty mandates.
-
----
-
-### Quadrant 4: Team Velocity & Keyman Dependency ($Q_4$)
-
-Engineering team dynamics directly impact post-acquisition execution capability.
-
-* **Shannon Commit Entropy:** Computes the informational entropy of author commits:
-  $$
-  H(C) = -\sum_{i=1}^n p(a_i) \log_2 p(a_i)
-  $$
-* **Bus Factor Determination:** The smallest number of engineers who together made more than half of the commits in the 12 months before the audited commit.
-* **Keyman Escrow Allocation:** If an individual engineer made $>70\%$ of the commits over the trailing 12 months, Veridence recommends an executive retention escrow holdback to prevent intellectual property abandonment.
+Every rule and estimate: https://www.veridence.agiphi.com/methodology
