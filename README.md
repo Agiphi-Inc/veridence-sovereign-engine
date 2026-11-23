@@ -24,7 +24,7 @@ flowchart LR
     A["<b>April 2026 Research Report</b><br/><i>'Agentic Forensic Reasoning'</i><br/>[RG: 412115837]"] -->|Architectural Redesign| B["<b>August 2026 Technical Report</b><br/><i>'Deterministic Algorithmic TDD'</i><br/>[RG: 404363566]"]
     
     A -.-> C["<b>Historical Archive</b><br/>github.com/agiphi/Veridence<br/><i>(Frozen for Citation Integrity)</i>"]
-    B -.-> D["<b>Production Engine</b><br/>github.com/agiphi/veridence-sovereign-engine<br/><i>(Deterministic Analysis & Sovereignty Enclave)</i>"]
+    B -.-> D["<b>Production Engine</b><br/>github.com/Agiphi-Inc/veridence-sovereign-engine<br/><i>(Deterministic Analysis & Sovereignty Enclave)</i>"]
 
     classDef legacy fill:#1e1b4b,stroke:#818cf8,stroke-width:1px,color:#e0e7ff;
     classDef current fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
@@ -42,7 +42,7 @@ flowchart LR
 | **Data Sovereignty** | API token pass-through to third-party generative inference endpoints | **The Sovereignty Protocol**: 100% ephemeral RAM sandboxing, zero disk writes, zero model retraining, instant memory wipe |
 | **Risk Framework** | Qualitative narrative reports | **4-Quadrant Infrastructure Risk Quantification** ($Q_1$ Architecture, $Q_2$ Security & GPL, $Q_3$ Cloud IaC, $Q_4$ Team Keyman) |
 | **Primary Interface** | Prototype web dashboard | **Slack Deal-Room Bot (`/veridence`)**, Web Console Cockpit, and Model Context Protocol (MCP) server |
-| **Repository Status** | [Historical Archive (`agiphi/Veridence`)](https://github.com/agiphi/Veridence) *(Frozen)* | [Sovereign Engine (`agiphi/veridence-sovereign-engine`)](https://github.com/agiphi/veridence-sovereign-engine) *(Active Production)* |
+| **Repository Status** | [Historical Archive (`agiphi/Veridence`)](https://github.com/agiphi/Veridence) *(Frozen)* | [Sovereign Engine (`Agiphi-Inc/veridence-sovereign-engine`)](https://github.com/Agiphi-Inc/veridence-sovereign-engine) *(Active Production)* |
 
 ---
 
